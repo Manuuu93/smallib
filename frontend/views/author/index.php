@@ -31,8 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'second_name',
             'last_name',
             'birth_date',
-            //'death_date',
-            //'country_id',
+            'death_date',
+            'country.name',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

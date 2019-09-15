@@ -40,7 +40,7 @@ class BookSearch extends Book
      */
     public function search($params)
     {
-        $query = Book::find();
+        $query = Book::find()->with('bookToAuthors')->with('authors');
 
         // add conditions that should always apply here
 

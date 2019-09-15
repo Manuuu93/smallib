@@ -14,9 +14,12 @@ use Yii;
  *
  * @property BookToAuthor[] $bookToAuthors
  * @property BookToGenre[] $bookToGenres
+ * @property Author[] $authors
  */
 class Book extends \yii\db\ActiveRecord
 {
+    public $author_ids;
+
     /**
      * {@inheritdoc}
      */
@@ -34,6 +37,7 @@ class Book extends \yii\db\ActiveRecord
             [['description'], 'string'],
             [['publish_date'], 'safe'],
             [['name'], 'string', 'max' => 255],
+            [['author_ids'], 'safe'],
         ];
     }
 
@@ -64,5 +68,13 @@ class Book extends \yii\db\ActiveRecord
     public function getBookToGenres()
     {
         return $this->hasMany(BookToGenre::className(), ['book_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAuthors()
+    {
+        return $this->hasMany(Author::className(), ['id' => 'author_id'])->via('bookToAuthors');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use app\models\BookToAuthor;
 use Yii;
 use app\models\Book;
 use app\models\BookSearch;
@@ -85,8 +86,25 @@ class BookController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+//
+//        if (Yii::$app->request->isPost) {
+//            echo '<pre>';
+//            print_r(Yii::$app->request->post());
+//            echo '</pre>';
+//            die;
+//        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+//            echo '<pre>';
+//            print_r($model->author_ids);
+//            echo '</pre>';
+//            die;
+            foreach ($model->author_ids as $author_id) {
+                $bookToAuthor = new BookToAuthor();
+                $bookToAuthor->book_id = $model->id;
+                $bookToAuthor->author_id = $author_id;
+                $bookToAuthor->save();
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
