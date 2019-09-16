@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "bizley/migration": "~2.3.0",
         "kartik-v/yii2-widget-select2": "dev-master",
-        "yii2tech/ar-linkmany": "^1.0"
+        "yii2tech/ar-linkmany": "^1.0",
+        "kartik-v/yii2-widget-datepicker": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

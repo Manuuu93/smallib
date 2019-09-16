@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveQuery;
 use yii2tech\ar\linkmany\LinkManyBehavior;
 
 /**
@@ -35,6 +36,11 @@ class Book extends \yii\db\ActiveRecord
                 'relation' => 'authors', // relation, which will be handled
                 'relationReferenceAttribute' => 'author_ids', // virtual attribute, which is used for related records specification
             ],
+            'linkGroupBehavior2' => [
+                'class' => LinkManyBehavior::className(),
+                'relation' => 'genres', // relation, which will be handled
+                'relationReferenceAttribute' => 'genre_ids', // virtual attribute, which is used for related records specification
+            ],
         ];
     }
 
@@ -47,7 +53,7 @@ class Book extends \yii\db\ActiveRecord
             [['description'], 'string'],
             [['publish_date'], 'safe'],
             [['name'], 'string', 'max' => 255],
-            [['author_ids'], 'safe'],
+            [['author_ids', 'genre_ids'], 'safe'],
         ];
     }
 
@@ -61,6 +67,7 @@ class Book extends \yii\db\ActiveRecord
             'name' => 'Name',
             'description' => 'Description',
             'publish_date' => 'Publish Date',
+            'author_ids' => 'Авторы'
         ];
     }
 
@@ -86,5 +93,13 @@ class Book extends \yii\db\ActiveRecord
     public function getAuthors()
     {
         return $this->hasMany(Author::className(), ['id' => 'author_id'])->via('bookToAuthors');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getGenres()
+    {
+        return $this->hasMany(Genre::className(), ['id' => 'genre_id'])->via('bookToGenres');
     }
 }
