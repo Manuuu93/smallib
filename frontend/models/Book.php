@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii2tech\ar\linkmany\LinkManyBehavior;
 
 /**
  * This is the model class for table "book".
@@ -18,14 +19,23 @@ use Yii;
  */
 class Book extends \yii\db\ActiveRecord
 {
-    public $author_ids;
-
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
         return 'book';
+    }
+
+    public function behaviors()
+    {
+        return [
+            'linkGroupBehavior' => [
+                'class' => LinkManyBehavior::className(),
+                'relation' => 'authors', // relation, which will be handled
+                'relationReferenceAttribute' => 'author_ids', // virtual attribute, which is used for related records specification
+            ],
+        ];
     }
 
     /**

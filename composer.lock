@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3ce2151eb2a0a44d605f4f511b455e87",
+    "content-hash": "abd8116a47ad06f4c56d835415fec6a5",
     "packages": [
         {
             "name": "bizley/migration",
@@ -812,6 +812,57 @@
                 "shim"
             ],
             "time": "2019-08-06T08:03:45+00:00"
+        },
+        {
+            "name": "yii2tech/ar-linkmany",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yii2tech/ar-linkmany.git",
+                "reference": "b13c3e6cc4b754420a11066ac650db565074d3c6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yii2tech/ar-linkmany/zipball/b13c3e6cc4b754420a11066ac650db565074d3c6",
+                "reference": "b13c3e6cc4b754420a11066ac650db565074d3c6",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii2tech\\ar\\linkmany\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Klimov",
+                    "email": "klimov.paul@gmail.com"
+                }
+            ],
+            "description": "Provides support for many-to-many relations saving in Yii2 ActiveRecord",
+            "keywords": [
+                "active",
+                "link",
+                "many",
+                "many to many",
+                "many-to-many",
+                "record",
+                "relaton",
+                "yii2"
+            ],
+            "time": "2018-02-09T14:02:04+00:00"
         },
         {
             "name": "yiisoft/yii2",
