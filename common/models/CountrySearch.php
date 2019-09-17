@@ -1,15 +1,15 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Genre;
+use app\models\Country;
 
 /**
- * GenreSearch represents the model behind the search form of `app\models\Genre`.
+ * CountrySearch represents the model behind the search form of `app\models\Country`.
  */
-class GenreSearch extends Genre
+class CountrySearch extends Country
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class GenreSearch extends Genre
     {
         return [
             [['id'], 'integer'],
-            [['name', 'description'], 'safe'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class GenreSearch extends Genre
      */
     public function search($params)
     {
-        $query = Genre::find();
+        $query = Country::find();
 
         // add conditions that should always apply here
 
@@ -61,8 +61,7 @@ class GenreSearch extends Genre
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

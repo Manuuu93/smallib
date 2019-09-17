@@ -1,25 +1,26 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use Yii;
 
 /**
- * This is the model class for table "country".
+ * This is the model class for table "genre".
  *
  * @property int $id
  * @property string $name
+ * @property string $description
  *
- * @property Author[] $authors
+ * @property BookToGenre[] $bookToGenres
  */
-class Country extends \yii\db\ActiveRecord
+class Genre extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'country';
+        return 'genre';
     }
 
     /**
@@ -28,6 +29,7 @@ class Country extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['description'], 'string'],
             [['name'], 'string', 'max' => 255],
         ];
     }
@@ -40,14 +42,15 @@ class Country extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
+            'description' => 'Description',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAuthors()
+    public function getBookToGenres()
     {
-        return $this->hasMany(Author::className(), ['country_id' => 'id']);
+        return $this->hasMany(BookToGenre::className(), ['genre_id' => 'id']);
     }
 }

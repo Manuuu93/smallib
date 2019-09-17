@@ -1,13 +1,13 @@
 <?php
 
-use app\models\Country;
+use common\models\Country;
 use kartik\date\DatePicker;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Author */
+/* @var $model common\models\Author */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

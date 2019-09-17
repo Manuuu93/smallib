@@ -1,27 +1,28 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use Yii;
+use yii\web\User;
 
 /**
- * This is the model class for table "book_to_author".
+ * This is the model class for table "users_readed_books".
  *
  * @property int $id
+ * @property int $user_id
  * @property int $book_id
- * @property int $author_id
  *
- * @property Author $author
  * @property Book $book
+ * @property User $user
  */
-class BookToAuthor extends \yii\db\ActiveRecord
+class UsersReadedBooks extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'book_to_author';
+        return 'users_readed_books';
     }
 
     /**
@@ -30,8 +31,7 @@ class BookToAuthor extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['book_id', 'author_id'], 'integer'],
-            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Author::className(), 'targetAttribute' => ['author_id' => 'id']],
+            [['user_id', 'book_id'], 'integer'],
             [['book_id'], 'exist', 'skipOnError' => true, 'targetClass' => Book::className(), 'targetAttribute' => ['book_id' => 'id']],
         ];
     }
@@ -43,17 +43,9 @@ class BookToAuthor extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'user_id' => 'User ID',
             'book_id' => 'Book ID',
-            'author_id' => 'Author ID',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAuthor()
-    {
-        return $this->hasOne(Author::className(), ['id' => 'author_id']);
     }
 
     /**
@@ -62,5 +54,13 @@ class BookToAuthor extends \yii\db\ActiveRecord
     public function getBook()
     {
         return $this->hasOne(Book::className(), ['id' => 'book_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 }

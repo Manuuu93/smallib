@@ -2,10 +2,9 @@
 
 namespace frontend\controllers;
 
-use app\models\BookToAuthor;
 use Yii;
-use app\models\Book;
-use app\models\BookSearch;
+use common\models\Book;
+use common\models\BookSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

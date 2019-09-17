@@ -1,15 +1,14 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Country;
 
 /**
- * CountrySearch represents the model behind the search form of `app\models\Country`.
+ * BookSearch represents the model behind the search form of `app\models\Book`.
  */
-class CountrySearch extends Country
+class BookSearch extends Book
 {
     /**
      * {@inheritdoc}
@@ -18,7 +17,7 @@ class CountrySearch extends Country
     {
         return [
             [['id'], 'integer'],
-            [['name'], 'safe'],
+            [['name', 'description', 'publish_date'], 'safe'],
         ];
     }
 
@@ -40,7 +39,7 @@ class CountrySearch extends Country
      */
     public function search($params)
     {
-        $query = Country::find();
+        $query = Book::find()->with('bookToAuthors')->with('authors');
 
         // add conditions that should always apply here
 
@@ -59,9 +58,11 @@ class CountrySearch extends Country
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'publish_date' => $this->publish_date,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }

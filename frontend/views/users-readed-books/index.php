@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\UsersReadedBooksSearch */
+/* @var $searchModel common\models\UsersReadedBooksSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Прочитанные книги';

@@ -1,27 +1,27 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use Yii;
 
 /**
- * This is the model class for table "book_to_genre".
+ * This is the model class for table "book_to_author".
  *
  * @property int $id
  * @property int $book_id
- * @property int $genre_id
+ * @property int $author_id
  *
+ * @property Author $author
  * @property Book $book
- * @property Genre $genre
  */
-class BookToGenre extends \yii\db\ActiveRecord
+class BookToAuthor extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'book_to_genre';
+        return 'book_to_author';
     }
 
     /**
@@ -30,9 +30,9 @@ class BookToGenre extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['book_id', 'genre_id'], 'integer'],
+            [['book_id', 'author_id'], 'integer'],
+            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Author::className(), 'targetAttribute' => ['author_id' => 'id']],
             [['book_id'], 'exist', 'skipOnError' => true, 'targetClass' => Book::className(), 'targetAttribute' => ['book_id' => 'id']],
-            [['genre_id'], 'exist', 'skipOnError' => true, 'targetClass' => Genre::className(), 'targetAttribute' => ['genre_id' => 'id']],
         ];
     }
 
@@ -44,8 +44,16 @@ class BookToGenre extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'book_id' => 'Book ID',
-            'genre_id' => 'Genre ID',
+            'author_id' => 'Author ID',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAuthor()
+    {
+        return $this->hasOne(Author::className(), ['id' => 'author_id']);
     }
 
     /**
@@ -54,13 +62,5 @@ class BookToGenre extends \yii\db\ActiveRecord
     public function getBook()
     {
         return $this->hasOne(Book::className(), ['id' => 'book_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getGenre()
-    {
-        return $this->hasOne(Genre::className(), ['id' => 'genre_id']);
     }
 }

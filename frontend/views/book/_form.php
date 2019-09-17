@@ -1,7 +1,7 @@
 <?php
 
-use app\models\Author;
-use app\models\Genre;
+use common\models\Author;
+use common\models\Genre;
 use kartik\date\DatePicker;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;

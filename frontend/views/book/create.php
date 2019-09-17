@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Book */
+/* @var $model common\models\Book */
 
 $this->title = 'Create Book';
 $this->params['breadcrumbs'][] = ['label' => 'Books', 'url' => ['index']];

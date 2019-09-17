@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\UsersReadedBooks */
+/* @var $model common\models\UsersReadedBooks */
 
 $this->title = 'Create Users Readed Books';
 $this->params['breadcrumbs'][] = ['label' => 'Users Readed Books', 'url' => ['index']];

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use yii2tech\ar\linkmany\LinkManyBehavior;
 

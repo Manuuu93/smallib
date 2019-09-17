@@ -1,15 +1,15 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\UsersReadedBooks;
+use app\models\Genre;
 
 /**
- * UsersReadedBooksSearch represents the model behind the search form of `app\models\UsersReadedBooks`.
+ * GenreSearch represents the model behind the search form of `app\models\Genre`.
  */
-class UsersReadedBooksSearch extends UsersReadedBooks
+class GenreSearch extends Genre
 {
     /**
      * {@inheritdoc}
@@ -17,7 +17,8 @@ class UsersReadedBooksSearch extends UsersReadedBooks
     public function rules()
     {
         return [
-            [['id', 'user_id', 'book_id'], 'integer'],
+            [['id'], 'integer'],
+            [['name', 'description'], 'safe'],
         ];
     }
 
@@ -39,7 +40,7 @@ class UsersReadedBooksSearch extends UsersReadedBooks
      */
     public function search($params)
     {
-        $query = UsersReadedBooks::find();
+        $query = Genre::find();
 
         // add conditions that should always apply here
 
@@ -58,9 +59,10 @@ class UsersReadedBooksSearch extends UsersReadedBooks
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'user_id' => $this->user_id,
-            'book_id' => $this->book_id,
         ]);
+
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }

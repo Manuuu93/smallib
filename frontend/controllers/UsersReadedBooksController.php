@@ -3,8 +3,8 @@
 namespace frontend\controllers;
 
 use Yii;
-use app\models\UsersReadedBooks;
-use app\models\UsersReadedBooksSearch;
+use common\models\UsersReadedBooks;
+use common\models\UsersReadedBooksSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

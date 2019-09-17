@@ -1,12 +1,12 @@
 <?php
 
-use app\models\Book;
+use common\models\Book;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\UsersReadedBooks */
+/* @var $model common\models\UsersReadedBooks */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

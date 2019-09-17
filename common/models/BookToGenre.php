@@ -1,28 +1,27 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use Yii;
-use yii\web\User;
 
 /**
- * This is the model class for table "users_readed_books".
+ * This is the model class for table "book_to_genre".
  *
  * @property int $id
- * @property int $user_id
  * @property int $book_id
+ * @property int $genre_id
  *
  * @property Book $book
- * @property User $user
+ * @property Genre $genre
  */
-class UsersReadedBooks extends \yii\db\ActiveRecord
+class BookToGenre extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'users_readed_books';
+        return 'book_to_genre';
     }
 
     /**
@@ -31,8 +30,9 @@ class UsersReadedBooks extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'book_id'], 'integer'],
+            [['book_id', 'genre_id'], 'integer'],
             [['book_id'], 'exist', 'skipOnError' => true, 'targetClass' => Book::className(), 'targetAttribute' => ['book_id' => 'id']],
+            [['genre_id'], 'exist', 'skipOnError' => true, 'targetClass' => Genre::className(), 'targetAttribute' => ['genre_id' => 'id']],
         ];
     }
 
@@ -43,8 +43,8 @@ class UsersReadedBooks extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
             'book_id' => 'Book ID',
+            'genre_id' => 'Genre ID',
         ];
     }
 
@@ -59,8 +59,8 @@ class UsersReadedBooks extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
+    public function getGenre()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return $this->hasOne(Genre::className(), ['id' => 'genre_id']);
     }
 }
