@@ -41,7 +41,8 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Присоединиться', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Вход', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = ['label' => 'Книги', 'url' => ['/book/index']];
+        $menuItems[] = ['label' => 'Мои книги', 'url' => ['/users-readed-books/index']];
+        $menuItems[] = ['label' => 'Библиотека', 'url' => ['/book/index']];
         $menuItems[] = ['label' => 'Авторы', 'url' => ['/author/index']];
         $menuItems[] = ['label' => 'Страны', 'url' => ['/country/index']];
         $menuItems[] = '<li>'

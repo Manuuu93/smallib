@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-use yii\db\ActiveQuery;
 use yii2tech\ar\linkmany\LinkManyBehavior;
 
 /**
