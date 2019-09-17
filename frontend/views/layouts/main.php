@@ -44,7 +44,6 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Мои книги', 'url' => ['/users-readed-books/index']];
         $menuItems[] = ['label' => 'Библиотека', 'url' => ['/book/index']];
         $menuItems[] = ['label' => 'Авторы', 'url' => ['/author/index']];
-        $menuItems[] = ['label' => 'Страны', 'url' => ['/country/index']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(

@@ -1,19 +1,18 @@
 <?php
 
-namespace frontend\controllers;
+namespace backend\controllers;
 
 use Yii;
-use common\models\UsersReadedBooks;
-use common\models\UsersReadedBooksSearch;
-use yii\filters\AccessControl;
+use common\models\Country;
+use common\models\CountrySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UsersReadedBooksController implements the CRUD actions for UsersReadedBooks model.
+ * CountryController implements the CRUD actions for Country model.
  */
-class UsersReadedBooksController extends Controller
+class CountryController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -21,17 +20,6 @@ class UsersReadedBooksController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['index', 'create', 'delete'],
-                'rules' => [
-                    [
-                        'actions' => ['index', 'create', 'delete'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -42,12 +30,12 @@ class UsersReadedBooksController extends Controller
     }
 
     /**
-     * Lists all UsersReadedBooks models.
+     * Lists all Country models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new UsersReadedBooksSearch();
+        $searchModel = new CountrySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -57,17 +45,29 @@ class UsersReadedBooksController extends Controller
     }
 
     /**
-     * Creates a new UsersReadedBooks model.
+     * Displays a single Country model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Creates a new Country model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new UsersReadedBooks();
-        $model->user_id = 1;
+        $model = new Country();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -76,7 +76,27 @@ class UsersReadedBooksController extends Controller
     }
 
     /**
-     * Deletes an existing UsersReadedBooks model.
+     * Updates an existing Country model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Deletes an existing Country model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -90,15 +110,15 @@ class UsersReadedBooksController extends Controller
     }
 
     /**
-     * Finds the UsersReadedBooks model based on its primary key value.
+     * Finds the Country model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return UsersReadedBooks the loaded model
+     * @return Country the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = UsersReadedBooks::findOne($id)) !== null) {
+        if (($model = Country::findOne($id)) !== null) {
             return $model;
         }
 

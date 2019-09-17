@@ -4,7 +4,6 @@ namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Genre;
 
 /**
  * GenreSearch represents the model behind the search form of `app\models\Genre`.
