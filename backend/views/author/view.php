@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Author;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -26,11 +27,15 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label' => 'Cтрана',
                 'attribute' => 'country.name',
-            ]
+            ],
+            'status'
         ],
     ]) ?>
 
     <p>
+        <?php if (Author::STATUS_MODERATION == $model->status): ?>
+            <?= Html::a('Approve', ['approve', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php endif; ?>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], ['class' => 'btn btn-danger',
             'data' => ['confirm' => 'Are you sure you want to delete this item?',

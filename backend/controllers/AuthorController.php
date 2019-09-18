@@ -65,6 +65,7 @@ class AuthorController extends Controller
     public function actionCreate()
     {
         $model = new Author();
+        $model->status = 'APPROVED';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -107,6 +108,16 @@ class AuthorController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionApprove($id)
+    {
+        $model = $this->findModel($id);
+        $model->setApproved();
+
+        return $this->render('view', [
+            'model' => $model,
+        ]);
     }
 
     /**

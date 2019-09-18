@@ -61,6 +61,7 @@ class AuthorSearch extends Author
             'birth_date' => $this->birth_date,
             'death_date' => $this->death_date,
             'country_id' => $this->country_id,
+            'status' => static::STATUS_APPROVED
         ]);
 
         $query->andFilterWhere(['like', 'first_name', $this->first_name])

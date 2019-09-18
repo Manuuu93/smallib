@@ -14,12 +14,15 @@ use Yii;
  * @property string $birth_date
  * @property string $death_date
  * @property int $country_id
+ * @property string $status
  *
  * @property Country $country
  * @property BookToAuthor[] $bookToAuthors
  */
 class Author extends \yii\db\ActiveRecord
 {
+    const STATUS_APPROVED = 'APPROVED';
+    const STATUS_MODERATION = 'MODERATION';
     /**
      * {@inheritdoc}
      */
@@ -36,7 +39,7 @@ class Author extends \yii\db\ActiveRecord
         return [
             [['birth_date', 'death_date'], 'safe'],
             [['country_id'], 'integer'],
-            [['first_name', 'second_name', 'last_name'], 'string', 'max' => 255],
+            [['first_name', 'second_name', 'last_name', 'status'], 'string', 'max' => 255],
             [['country_id'], 'exist', 'skipOnError' => true, 'targetClass' => Country::className(), 'targetAttribute' => ['country_id' => 'id']],
         ];
     }
@@ -54,6 +57,7 @@ class Author extends \yii\db\ActiveRecord
             'birth_date' => 'Birth Date',
             'death_date' => 'Death Date',
             'country_id' => 'Country ID',
+            'status' => 'Status'
         ];
     }
 
@@ -71,5 +75,14 @@ class Author extends \yii\db\ActiveRecord
     public function getBookToAuthors()
     {
         return $this->hasMany(BookToAuthor::className(), ['author_id' => 'id']);
+    }
+
+    /**
+     * @return boolean
+     */
+    public function setApproved()
+    {
+        $this->status = static::STATUS_APPROVED;
+        return $this->save();
     }
 }
