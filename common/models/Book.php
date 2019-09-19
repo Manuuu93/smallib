@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use app\models\Quote;
 use yii2tech\ar\linkmany\LinkManyBehavior;
 
 /**
@@ -17,6 +18,7 @@ use yii2tech\ar\linkmany\LinkManyBehavior;
  * @property BookToGenre[] $bookToGenres
  * @property Author[] $authors
  * @property Genre[] $genres
+ * @property Quote[] $quotes
  */
 class Book extends \yii\db\ActiveRecord
 {
@@ -105,6 +107,14 @@ class Book extends \yii\db\ActiveRecord
     public function getGenres()
     {
         return $this->hasMany(Genre::className(), ['id' => 'genre_id'])->via('bookToGenres');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getQuotes()
+    {
+        return $this->hasMany(Quote::className(), ['book_id' => 'id']);
     }
 
     /**
