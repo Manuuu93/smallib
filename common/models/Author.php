@@ -18,6 +18,7 @@ use Yii;
  *
  * @property Country $country
  * @property BookToAuthor[] $bookToAuthors
+ * @property Book[] $books
  */
 class Author extends \yii\db\ActiveRecord
 {
@@ -75,6 +76,14 @@ class Author extends \yii\db\ActiveRecord
     public function getBookToAuthors()
     {
         return $this->hasMany(BookToAuthor::className(), ['author_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBooks()
+    {
+        return $this->hasMany(Book::className(), ['id' => 'book_id'])->via('bookToAuthors');
     }
 
     /**

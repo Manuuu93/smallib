@@ -2,9 +2,11 @@
 
 namespace backend\controllers;
 
+use common\models\BookSearch;
 use Yii;
 use common\models\Author;
 use common\models\AuthorSearch;
+use common\models\BookToAuthor;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -52,8 +54,10 @@ class AuthorController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 

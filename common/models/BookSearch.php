@@ -67,10 +67,10 @@ class BookSearch extends Book
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'description', $this->description]);
 
-        if($status) {
+        if ($status) {
             $query->andFilterWhere([
-                'status' => $status]
-            );
+                'status' => $status
+            ]);
         }
 
         return $dataProvider;

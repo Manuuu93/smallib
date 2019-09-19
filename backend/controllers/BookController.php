@@ -65,6 +65,7 @@ class BookController extends Controller
     public function actionCreate()
     {
         $model = new Book();
+        $model->status = Book::STATUS_APPROVED;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

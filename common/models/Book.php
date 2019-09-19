@@ -16,6 +16,7 @@ use yii2tech\ar\linkmany\LinkManyBehavior;
  * @property BookToAuthor[] $bookToAuthors
  * @property BookToGenre[] $bookToGenres
  * @property Author[] $authors
+ * @property Genre[] $genres
  */
 class Book extends \yii\db\ActiveRecord
 {
