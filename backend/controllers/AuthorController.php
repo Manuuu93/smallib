@@ -110,6 +110,12 @@ class AuthorController extends Controller
         return $this->redirect(['index']);
     }
 
+    /**
+     * Changes status to 'APPROVED'
+     * @param $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
     public function actionApprove($id)
     {
         $model = $this->findModel($id);

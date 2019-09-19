@@ -20,6 +20,7 @@ class m190912_134332_create_author_table extends Migration
             'birth_date' => $this->date(),
             'death_date' => $this->date(),
             'country_id' => $this->integer(),
+            'status' => $this->string(),
         ]);
 
         $this->createIndex(

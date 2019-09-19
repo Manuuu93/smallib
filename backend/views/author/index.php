@@ -31,8 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'last_name',
             'birth_date',
             'death_date',
-            'country.name',
-
+            [
+                'label' => 'Страна',
+                'attribute' => 'country.name',
+            ],
+            [
+                'label' => 'Статус модерации',
+                'attribute' => 'status',
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

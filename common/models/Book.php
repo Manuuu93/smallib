@@ -11,6 +11,7 @@ use yii2tech\ar\linkmany\LinkManyBehavior;
  * @property string $name
  * @property string $description
  * @property string $publish_date
+ * @property string $status
  *
  * @property BookToAuthor[] $bookToAuthors
  * @property BookToGenre[] $bookToGenres
@@ -18,6 +19,8 @@ use yii2tech\ar\linkmany\LinkManyBehavior;
  */
 class Book extends \yii\db\ActiveRecord
 {
+    const STATUS_APPROVED = 'APPROVED';
+    const STATUS_MODERATION = 'MODERATION';
     /**
      * {@inheritdoc}
      */
@@ -51,6 +54,7 @@ class Book extends \yii\db\ActiveRecord
             [['description'], 'string'],
             [['publish_date'], 'safe'],
             [['name'], 'string', 'max' => 255],
+            [['status'], 'string', 'max' => 32],
             [['author_ids', 'genre_ids'], 'safe'],
         ];
     }
@@ -65,6 +69,7 @@ class Book extends \yii\db\ActiveRecord
             'name' => 'Name',
             'description' => 'Description',
             'publish_date' => 'Publish Date',
+            'status' => 'Статус',
             'author_ids' => 'Авторы'
         ];
     }
@@ -99,5 +104,14 @@ class Book extends \yii\db\ActiveRecord
     public function getGenres()
     {
         return $this->hasMany(Genre::className(), ['id' => 'genre_id'])->via('bookToGenres');
+    }
+
+    /**
+     * @return boolean
+     */
+    public function setApproved()
+    {
+        $this->status = static::STATUS_APPROVED;
+        return $this->save();
     }
 }

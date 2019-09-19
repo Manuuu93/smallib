@@ -110,6 +110,22 @@ class BookController extends Controller
     }
 
     /**
+     * Changes status to 'APPROVED'
+     * @param $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionApprove($id)
+    {
+        $model = $this->findModel($id);
+        $model->setApproved();
+
+        return $this->render('view', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
      * Finds the Book model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id

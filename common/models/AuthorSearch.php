@@ -17,7 +17,7 @@ class AuthorSearch extends Author
     {
         return [
             [['id', 'country_id'], 'integer'],
-            [['first_name', 'second_name', 'last_name', 'birth_date', 'death_date'], 'safe'],
+            [['first_name', 'second_name', 'last_name', 'birth_date', 'death_date', 'status'], 'safe'],
         ];
     }
 
@@ -37,7 +37,7 @@ class AuthorSearch extends Author
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $status = null)
     {
         $query = Author::find();
 
@@ -61,12 +61,18 @@ class AuthorSearch extends Author
             'birth_date' => $this->birth_date,
             'death_date' => $this->death_date,
             'country_id' => $this->country_id,
-            'status' => static::STATUS_APPROVED
+            'status' => $this->status
         ]);
 
         $query->andFilterWhere(['like', 'first_name', $this->first_name])
             ->andFilterWhere(['like', 'second_name', $this->second_name])
             ->andFilterWhere(['like', 'last_name', $this->last_name]);
+
+        if($status) {
+            $query->andFilterWhere([
+                'status' => $status,
+            ]);
+        }
 
         return $dataProvider;
     }

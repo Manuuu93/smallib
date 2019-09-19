@@ -3,6 +3,7 @@
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use common\models\Book;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Book */
@@ -34,6 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
     <p>
+        <?php if (Book::STATUS_MODERATION == $model->status): ?>
+            <?= Html::a('Approve', ['approve', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php endif; ?>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',

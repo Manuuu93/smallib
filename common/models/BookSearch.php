@@ -37,7 +37,7 @@ class BookSearch extends Book
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $status = null)
     {
         $query = Book::find()->with('bookToAuthors')->with('authors');
 
@@ -45,6 +45,9 @@ class BookSearch extends Book
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 50
+            ],
         ]);
 
         $this->load($params);
@@ -63,6 +66,12 @@ class BookSearch extends Book
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'description', $this->description]);
+
+        if($status) {
+            $query->andFilterWhere([
+                'status' => $status]
+            );
+        }
 
         return $dataProvider;
     }

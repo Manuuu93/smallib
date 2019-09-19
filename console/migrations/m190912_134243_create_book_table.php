@@ -17,6 +17,7 @@ class m190912_134243_create_book_table extends Migration
             'name' => $this->string(),
             'description' => $this->text(),
             'publish_date' => $this->date(),
+            'status' => $this->string(),
         ]);
     }
 

@@ -53,7 +53,7 @@ class AuthorController extends Controller
     public function actionIndex()
     {
         $searchModel = new AuthorSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, Author::STATUS_APPROVED);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
