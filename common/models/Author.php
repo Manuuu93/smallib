@@ -15,6 +15,7 @@ use Yii;
  * @property string $death_date
  * @property int $country_id
  * @property string $status
+ * @property string $fullName
  *
  * @property Country $country
  * @property BookToAuthor[] $bookToAuthors
@@ -60,6 +61,14 @@ class Author extends \yii\db\ActiveRecord
             'country_id' => 'Country ID',
             'status' => 'Status'
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->last_name . ' ' . $this->first_name . ' ' . $this->second_name;
     }
 
     /**

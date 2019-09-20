@@ -30,7 +30,7 @@ use yii\widgets\ActiveForm;
     ]) ?>
 
     <?= $form->field($model, 'author_ids')->widget(Select2::className(), [
-        'data' => ArrayHelper::map(Author::find()->all(), 'id', 'last_name'),
+        'data' => ArrayHelper::map(Author::find()->all(), 'id', 'fullName'),
         'options' => [
             'multiple' => true, 'value' => ArrayHelper::getColumn($model->authors, function ($element) {
                 return $element->id;

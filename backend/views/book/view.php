@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'publish_date',
                 [
                     'label' => 'Авторы',
-                    'value' => implode(', ', ArrayHelper::map($model->authors, 'id', 'last_name')),
+                    'value' => implode(', ', ArrayHelper::map($model->authors, 'id', 'fullName')),
                 ],
                 [
                     'label' => 'Жанры',
