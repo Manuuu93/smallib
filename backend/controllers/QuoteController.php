@@ -62,13 +62,14 @@ class QuoteController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($book = null)
     {
         $model = new Quote();
-        $model->user_id = Yii::$app->user->id;
+
+        $model->book_id = $book;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['book/view', 'id' => $model->book_id]);
         }
 
         return $this->render('create', [

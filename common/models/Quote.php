@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use yii\behaviors\BlameableBehavior;
+
 /**
  * This is the model class for table "quote".
  *
@@ -33,6 +35,20 @@ class Quote extends \yii\db\ActiveRecord
             [['content'], 'string', 'max' => 512],
             [['book_id'], 'exist', 'skipOnError' => true, 'targetClass' => Book::className(), 'targetAttribute' => ['book_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'user_id',
+                'updatedByAttribute' => false,
+            ],
         ];
     }
 
