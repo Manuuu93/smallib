@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\AttributeBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "author".
@@ -25,6 +27,20 @@ class Author extends \yii\db\ActiveRecord
 {
     const STATUS_APPROVED = 'APPROVED';
     const STATUS_MODERATION = 'MODERATION';
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => AttributeBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'status',
+                ],
+                'value' => self::STATUS_MODERATION,
+            ]
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */

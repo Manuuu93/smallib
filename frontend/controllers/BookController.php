@@ -83,8 +83,6 @@ class BookController extends Controller
     {
         $model = new Book();
 
-        $model->status = 'MODERATION';
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }

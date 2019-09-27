@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use yii\behaviors\AttributeBehavior;
+use yii\db\ActiveRecord;
 use yii2tech\ar\linkmany\LinkManyBehavior;
 
 /**
@@ -44,6 +46,13 @@ class Book extends \yii\db\ActiveRecord
                 'relation' => 'genres', // relation, which will be handled
                 'relationReferenceAttribute' => 'genre_ids', // virtual attribute, which is used for related records specification
             ],
+            [
+                'class' => AttributeBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'status',
+                ],
+                'value' => self::STATUS_MODERATION,
+            ]
         ];
     }
 

@@ -5,6 +5,8 @@ namespace frontend\controllers;
 use Yii;
 use common\models\Author;
 use common\models\AuthorSearch;
+use yii\behaviors\AttributeBehavior;
+use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -82,8 +84,6 @@ class AuthorController extends Controller
     public function actionCreate()
     {
         $model = new Author();
-
-        $model->status = 'MODERATION';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
