@@ -10,6 +10,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 use yii\web\UploadedFile;
 
 /**
@@ -81,16 +82,20 @@ class BookController extends Controller
      */
     public function actionUploadPicture()
     {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
         $model = new PictureForm();
         $model->picture = UploadedFile::getInstance($model, 'picture');
 
         if($model->validate()) {
             Yii::$app->session['bookPicture'] = Yii::$app->storage->saveUploadedFile($model->picture);
+            return [
+                'success' => true,
+                'pictureUri' => Yii::$app->storage->getFile(Yii::$app->session['bookPicture']),
+            ];
         }
 
-        echo '<pre>';
-        print_r($model->getErrors());
-        echo '<pre>';
+        return ['success' => false, 'errors' => $model->getErrors()];
     }
 
     /**

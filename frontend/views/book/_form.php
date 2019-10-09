@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 /* @var $modelPicture PictureForm */
 ?>
 
-<img src="<?=$model->getPicture()?>">
+<img src="<?=$model->getPicture()?>" id="book-picture">
 
 <div class="book-form">
 
@@ -64,8 +64,7 @@ use yii\widgets\ActiveForm;
         // see: https://github.com/blueimp/jQuery-File-Upload/wiki/Options#processing-callback-options
         'clientEvents' => [
             'fileuploaddone' => 'function(e, data) {
-                                console.log(e);
-                                console.log(data);
+                                $("#book-picture").attr("src", data.result.pictureUri);
                             }',
             'fileuploadfail' => 'function(e, data) {
                                 console.log(e);
