@@ -16,6 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <img src="<?=$model->getPicture()?>">
+    
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [

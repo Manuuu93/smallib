@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\PictureForm;
 use Yii;
 use common\models\Book;
 use common\models\BookSearch;
@@ -9,6 +10,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * BookController implements the CRUD actions for Book model.
@@ -75,6 +77,23 @@ class BookController extends Controller
     }
 
     /**
+     * Uploades book picture
+     */
+    public function actionUploadPicture()
+    {
+        $model = new PictureForm();
+        $model->picture = UploadedFile::getInstance($model, 'picture');
+
+        if($model->validate()) {
+            Yii::$app->session['bookPicture'] = Yii::$app->storage->saveUploadedFile($model->picture);
+        }
+
+        echo '<pre>';
+        print_r($model->getErrors());
+        echo '<pre>';
+    }
+
+    /**
      * Creates a new Book model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -82,6 +101,16 @@ class BookController extends Controller
     public function actionCreate()
     {
         $model = new Book();
+        $modelPicture = new PictureForm();
+
+        if(!empty(Yii::$app->session['bookPicture'])) {
+            $model->picture = Yii::$app->session['bookPicture'];
+        }
+
+        if(!empty(Yii::$app->session['bookPicture'])) {
+            $model->picture = Yii::$app->session['bookPicture'];
+            unset(Yii::$app->session['bookPicture']);
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -89,6 +118,7 @@ class BookController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'modelPicture' => $modelPicture,
         ]);
     }
 
@@ -102,6 +132,12 @@ class BookController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $modelPicture = new PictureForm();
+
+        if(!empty(Yii::$app->session['bookPicture'])) {
+            $model->picture = Yii::$app->session['bookPicture'];
+            unset(Yii::$app->session['bookPicture']);
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -109,6 +145,7 @@ class BookController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'modelPicture' => $modelPicture,
         ]);
     }
 

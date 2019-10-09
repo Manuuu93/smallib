@@ -14,6 +14,7 @@ use yii2tech\ar\linkmany\LinkManyBehavior;
  * @property string $description
  * @property string $publish_date
  * @property string $status
+ * @property string $picture
  *
  * @property BookToAuthor[] $bookToAuthors
  * @property BookToGenre[] $bookToGenres
@@ -132,5 +133,12 @@ class Book extends \yii\db\ActiveRecord
     {
         $this->status = static::STATUS_APPROVED;
         return $this->save();
+    }
+
+    public function getPicture()
+    {
+        if($this->picture) {
+            return \Yii::$app->storage->getFile($this->picture);
+        }
     }
 }

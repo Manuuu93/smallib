@@ -4,6 +4,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Book */
+/* @var $modelPicture \common\models\PictureForm */
 
 $this->title = 'Create Book';
 $this->params['breadcrumbs'][] = ['label' => 'Books', 'url' => ['index']];
@@ -15,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'modelPicture' => $modelPicture,
     ]) ?>
 
 </div>

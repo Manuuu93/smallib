@@ -42,6 +42,9 @@ return [
             'rules' => [
             ],
         ],
+        'storage' => [
+            'class' => 'frontend\components\Storage',
+        ]
     ],
     'params' => $params,
 ];

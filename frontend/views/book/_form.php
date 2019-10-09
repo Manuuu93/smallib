@@ -2,6 +2,8 @@
 
 use common\models\Author;
 use common\models\Genre;
+use common\models\PictureForm;
+use dosamigos\fileupload\FileUpload;
 use kartik\date\DatePicker;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
@@ -9,9 +11,12 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Book */
+/* @var $model common\models\Book */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $modelPicture PictureForm */
 ?>
+
+<img src="<?=$model->getPicture()?>">
 
 <div class="book-form">
 
@@ -46,6 +51,28 @@ use yii\widgets\ActiveForm;
             })
         ]
     ]) ?>
+
+    <?= FileUpload::widget([
+        'model' => $modelPicture,
+        'attribute' => 'picture',
+        'url' => ['/book/upload-picture'], // your url, this is just for demo purposes,
+        'options' => ['accept' => 'image/*'],
+        'clientOptions' => [
+            'maxFileSize' => 2000000
+        ],
+        // Also, you can specify jQuery-File-Upload events
+        // see: https://github.com/blueimp/jQuery-File-Upload/wiki/Options#processing-callback-options
+        'clientEvents' => [
+            'fileuploaddone' => 'function(e, data) {
+                                console.log(e);
+                                console.log(data);
+                            }',
+            'fileuploadfail' => 'function(e, data) {
+                                console.log(e);
+                                console.log(data);
+                            }',
+        ],
+    ]); ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
